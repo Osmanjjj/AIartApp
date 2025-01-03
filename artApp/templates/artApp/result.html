@@ -1,0 +1,16 @@
+<!-- myapp/templates/myapp/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AI Video Result</title>
+</head>
+<body>
+    <h1>Generation Result</h1>
+    <p>Prompt: {{ prompt }}</p>
+    <video src="{{ video_path }}" controls autoplay loop width="640"></video>
+    <br/><br/>
+    <a href="{% url 'index' %}">Try another</a>
+</body>
+</html>
+

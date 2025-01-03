@@ -1,0 +1,121 @@
+<!-- myapp/templates/myapp/index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>AI Video Generation</title>
+
+    <!-- Google Fontsの読み込み (Noto Sans JP 例) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ベーススタイル */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f3f3f3;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        /* コンテナ (中央寄せ & カード風) */
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        /* タイトル */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+        }
+
+        /* ラベル */
+        label {
+            font-weight: 700;
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* 入力フォーム (テキスト/セレクト) */
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        /* チェックボックスのラベル */
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-top: 16px;
+            font-weight: normal;
+        }
+        .checkbox-label input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        /* 送信ボタン */
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* フォームのプレースホルダー */
+        ::placeholder {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Video Generation</h1>
+
+        <form method="POST" action="{% url 'generate_video' %}">
+            {% csrf_token %}
+
+            <label>Prompt:</label>
+            <input
+                type="text"
+                name="prompt"
+                placeholder="プロンプトを入力してください..."
+            />
+
+            <label>Aspect Ratio:</label>
+            <select name="aspect_ratio">
+                <option value="16:9" selected>16:9</option>
+                <option value="1:1">1:1</option>
+                <option value="9:16">9:16</option>
+            </select>
+
+            <label class="checkbox-label">
+                <input type="checkbox" name="loop" />
+                ループ再生を有効にする
+            </label>
+
+            <input type="submit" value="Generate Video">
+        </form>
+    </div>
+</body>
+</html>
